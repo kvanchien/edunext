@@ -1,0 +1,498 @@
+{
+  "users": [
+    { "id": 1, "username": "admin", "password": "admin", "role": "admin", "campus": "HOLA" },
+    { "id": 2, "username": "tuanvm", "password": "tuanvm", "role": "teacher", "campus": "HOLA" },
+    { "id": 3, "username": "hoann", "password": "hoann", "role": "teacher", "campus": "HOLA" },
+    { "id": 4, "username": "sv1", "password": "123", "role": "student", "campus": "HOLA" },
+    { "id": 5, "username": "sv2", "password": "123", "role": "student", "campus": "HOLA" }
+  ],
+  "students": [
+    {
+      "studentId": 1,
+      "userId": 4,
+      "name": "Nguyen Van A",
+      "class": "SE1900",
+      "campus": "HOLA",
+      "courses": [1, 2]
+    },
+    {
+      "studentId": 2,
+      "userId": 5,
+      "name": "Nguyen Van B",
+      "class": "SE9999",
+      "campus": "HOLA",
+      "courses": [2]
+    }
+  ],
+  "teachers": [
+    {
+      "teacherId": 1,
+      "userId": 2,
+      "name": "tuanvm",
+      "courses": [1]
+    },
+    {
+      "teacherId": 2,
+      "userId": 3,
+      "name": "hoann",
+      "courses": [2]
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "name": "Lab211_ OOP with Java Lab_Thực hành OOP với Java",
+      "class": "SE1900",
+      "teacher": 1,
+      "numberStudent": 20,
+      "slots": [
+        {
+          "id": 1,
+          "title": "Introduction",
+          "desc": "Introduction to the course and class rules",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Getting Started",
+          "desc": "Downloading and installing necessary programming tools",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Slot 3",
+          "desc": "Description of slot 3",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "title": "Slot 4",
+          "desc": "Description of slot 4",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Slot 5",
+          "desc": "Description of slot 5",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "title": "Slot 6",
+          "desc": "Description of slot 6",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "title": "Slot 7",
+          "desc": "Description of slot 7",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "title": "Slot 8",
+          "desc": "Description of slot 8",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "title": "Slot 9",
+          "desc": "Description of slot 9",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "title": "Slot 10",
+          "desc": "Description of slot 10",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "title": "Slot 11",
+          "desc": "Description of slot 11",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "title": "Slot 12",
+          "desc": "Description of slot 12",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 13, 
+          "title": "Slot 13",
+          "desc": "Description of slot 13",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "FER202_Front-End web development with React_Phát triển web Front-End với React",
+      "class": "SE9999",
+      "teacher": 2,
+      "numberStudent": 27,
+      "slots": [
+        {
+          "id": 1,
+          "title": "Introduction to FER",
+          "desc": "Introduction to the subject and its achievements",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Slot 2",
+          "desc": "Description of slot 2",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Slot 3",
+          "desc": "Description of slot 3",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "title": "Slot 4",
+          "desc": "Description of slot 4",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Slot 5",
+          "desc": "Description of slot 5",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "title": "Slot 6",
+          "desc": "Description of slot 6",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "title": "Slot 7",
+          "desc": "Description of slot 7",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "title": "Slot 8",
+          "desc": "Description of slot 8",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "title": "Slot 9",
+          "desc": "Description of slot 9",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "title": "Slot 10",
+          "desc": "Description of slot 10",
+          "question": [
+            {
+              "id":1,
+              "context":"How to get the course"
+            },
+            {
+              "id":2,
+              "context":"What is class rules"
+            },
+            {
+              "id":3,
+              "context":"How to pass"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
