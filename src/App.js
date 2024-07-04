@@ -6,6 +6,7 @@ import { AuthProvider } from './context/AuthProvider';
 import Login from './components/Login';
 import Management from './components/Management';
 import CourseDetails from "./components/CourseDetails";
+import SlotsDetail from './components/SlotsDetail';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/management" element={<Management />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
+          <Route path="/slots/:id" element={<SlotsDetail />} />
         </Routes>
       </Router>
     </AuthProvider>

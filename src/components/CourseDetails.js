@@ -20,13 +20,16 @@ import {
   List,
   Form,
   Breadcrumb,
-  Space,
   Pagination,
+  Collapse,
+  Select,
 } from "antd";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { Container, Row, Col, Badge } from "react-bootstrap";
 import axios from "axios";
+
+const { Option } = Select;
 
 const items = [
   {
@@ -75,7 +78,8 @@ const CourseDetails = () => {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 5; 
+  const [filter, setFilter] = useState("All");
+  const pageSize = 5;
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -159,6 +163,18 @@ const CourseDetails = () => {
     }
   };
 
+  const filterQuestions = (questions) => {
+    if (filter === "All") {
+      return questions;
+    } else {
+      return questions.filter((question) => question.state === filter);
+    }
+  };
+
+  const handleQuestionClick = (slotId, questionId) => {
+    navigate(`/slot/${slotId}/question/${questionId}`);
+  };
+
   if (!course) {
     return <h2>Course not found</h2>;
   }
@@ -173,7 +189,7 @@ const CourseDetails = () => {
         <Col md={3}>
           <div style={{ display: "flex" }}>
             <div style={{ width: 256 }}>
-            <img
+              <img
                 src="/images/FPT_Education_logo.svg.png"
                 alt="logo"
                 width={"80px"}
@@ -356,54 +372,94 @@ const CourseDetails = () => {
               },
             ]}
           ></Breadcrumb>
+          <br/>
+          <Row>
+            <h6 style={{color:"#0078d4"}}>Filter by activities</h6>
+          <Select
+            defaultValue="All"
+            style={{ width: 200, marginBottom: 10 }}
+            onChange={(value) => setFilter(value)}
+          >
+            <Option value="All">All Activities</Option>
+            <Option value="On going">On going</Option>
+            <Option value="Done">Done</Option>
+          </Select>
+          </Row>
+          
 
           <Card
             title={course.name}
             bordered={false}
             style={{ width: "100%", marginTop: 16 }}
           >
-            <Space
-              direction="vertical"
-              size="middle"
-              style={{ display: "flex" }}
-            >
-              <List
-                itemLayout="horizontal"
-                dataSource={currentSlots}
-                renderItem={(slot) => (
-                  <List.Item>
-                    <Button type="primary">Slot {slot.id}</Button> <br />
-                    <List.Item.Meta
-                      title={slot.title}
-                      description={slot.desc}
-                    />
-                  </List.Item>
-                )}
-              />
-            </Space>
+            <List
+              itemLayout="horizontal"
+              dataSource={currentSlots}
+              renderItem={(slot) => (
+                <List.Item>
+                  <Button type="primary">Slot {slot.id}</Button>{" "}
+                  <Link
+                    to={`/slot/${slot.id}`}
+                    style={{ marginLeft: "1100px" }}
+                  >
+                    <Button type="link">View slot</Button>
+                  </Link>
+                  <br />
+                  <List.Item.Meta title={slot.title} description={slot.desc} />
+                  <Collapse accordion>
+                    {slot.question && slot.question.length > 0 ? (
+                        filterQuestions(slot.question).map((question, index) => (
+                        <Collapse.Panel header={`CQ${index + 1}`} key={index}>
+                          <p
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              cursor: "pointer",
+                            }}
+                            onClick={() =>
+                              handleQuestionClick(slot.id, question.id)
+                            }
+                          >
+                            {question.context}
+                            <Badge
+                              style={{
+                                color:
+                                  question.state === "Done" ? "black" : "white",
+                              }}
+                            >
+                              {question.state}
+                            </Badge>
+                          </p>
+                        </Collapse.Panel>
+                      ))
+                    ) : (
+                      <p>No questions available for this slot.</p>
+                    )}
+                  </Collapse>
+                </List.Item>
+              )}
+            />
           </Card>
           <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            width: "100%",
-            textAlign: "center",
-            background: "#fff",
-            padding: "10px 0",
-          }}
-        >
-          <Pagination
-            
-            current={currentPage}
-            pageSize={pageSize}
-            total={course.slots.length}
-            onChange={onPageChange}
-            showSizeChanger={false}
-            showQuickJumper={false}
-            prevIcon={<Button onClick={handlePrev}>Prev</Button>}
-            nextIcon={<Button onClick={handleNext}>Next</Button>}
-          />{" "}
-        </div>
+            style={{
+              position: "absolute",
+              width: "100%",
+              textAlign: "center",
+              background: "#fff",
+            }}
+          >
+            <Pagination
+              current={currentPage}
+              pageSize={pageSize}
+              total={course.slots.length}
+              onChange={onPageChange}
+              showSizeChanger={false}
+              showQuickJumper={false}
+              prevIcon={<Button onClick={handlePrev}>Prev</Button>}
+              nextIcon={<Button onClick={handleNext}>Next</Button>}
+            />{" "}
+          </div>
         </Col>
       </Row>
     </Container>

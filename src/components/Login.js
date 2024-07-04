@@ -144,11 +144,11 @@ export default function Login() {
                     value={campus}
                     onChange={(e) => setCampus(e.target.value)}
                   >
-                    <option value="DN">Da Nang</option>
-                    <option value="CT">Can Tho</option>
-                    <option value="QN">Quy Nhon</option>
-                    <option value="HCM">Ho Chi Minh</option>
-                    <option value="HOLA">Ha Noi - Hoa Lac</option>
+                    <option value="DN">Đà Nẵng </option>
+                    <option value="CT">Cần Thơ </option>
+                    <option value="QN">Quy Nhơn </option>
+                    <option value="HCM">Hồ Chí Minh </option>
+                    <option value="HOLA">Hà Nội - Hòa Lạc </option>
                   </Form.Select>
                 </Col>
               </Row>
