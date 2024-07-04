@@ -7,6 +7,8 @@ import Login from './components/Login';
 import Management from './components/Management';
 import CourseDetails from "./components/CourseDetails";
 import SlotsDetail from './components/SlotsDetail';
+import QuestionDetailPage from './components/QuestionDetailPage';
+
 
 function App() {
   return (
@@ -17,7 +19,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/management" element={<Management />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
-          <Route path="/slots/:id" element={<SlotsDetail />} />
+          <Route path="/course/:courseId/slot/:slotId" component={SlotsDetail} />
+          <Route path="/courses/:courseId/slots/:slotId" component={QuestionDetailPage} />
         </Routes>
       </Router>
     </AuthProvider>
