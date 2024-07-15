@@ -9,10 +9,6 @@ import {
   CustomerServiceFilled,
   LogoutOutlined,
   UserOutlined,
-  DesktopOutlined,
-  IdcardOutlined,
-  RightCircleTwoTone,
-  TeamOutlined,
   HomeOutlined,
 } from "@ant-design/icons";
 import { Button, Menu, Modal, Form, Tabs, Select, Card } from "antd";
@@ -64,7 +60,7 @@ const items = [
   },
 ];
 
-const TeacherDasboard = () => {
+const Assignment = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [showContact, setShowContact] = useState(false);
@@ -74,7 +70,7 @@ const TeacherDasboard = () => {
   const [courses, setCourses] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [students, setStudents] = useState([]);
-  const [loggedInStudent, setLoggedInStudent] = useState(null); // State for logged-in student
+  const [loggedInStudent, setLoggedInStudent] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -97,7 +93,7 @@ const TeacherDasboard = () => {
         const loggedInStudentData = res.data.find(
           (student) => student.userId === user.id
         );
-        console.log("Logged in student data:", loggedInStudentData); 
+        console.log("Logged in student data:", loggedInStudentData);
         setLoggedInStudent(loggedInStudentData);
       }
     };
@@ -125,6 +121,8 @@ const TeacherDasboard = () => {
       handleDownloadPDF();
     } else if (e.key === "6") {
       setShowContact(true);
+    } else if (e.key === "1") {
+      navigate("/management");
     } else if (e.key === "7") {
       setShowFQA(true);
     } else {
@@ -372,145 +370,28 @@ const TeacherDasboard = () => {
         </Col>
 
         <Col md={9}>
-          <Tabs defaultActiveKey="1" onChange={callback}>
-            <TabPane tab="COURSE" key="1">
-              <Row>
-                <h4>Semester</h4>
-                <Select
-                  defaultValue="Trial"
-                  style={{
-                    width: 155,
-                  }}
-                  onChange={handleChange}
-                  options={[
-                    {
-                      value: "Trial",
-                      label: "Trial",
-                    },
-                    {
-                      value: "SUMMER2024",
-                      label: "SUMMER2024",
-                    },
-                    {
-                      value: "SPRING2024",
-                      label: "SPRING2024",
-                    },
-                    {
-                      value: "FAL2023",
-                      label: "FAL2023",
-                    },
-                  ]}
-                />
-              </Row>
-              <Row>
-                <a href="#" onClick={setShowUpdate}>
-                  Recently Updated (Để xem chi tiết về các thay đổi cập nhật gần
-                  đây, vui lòng nhấp vào đây)
-                </a>
-                <Modal
-                  visible={showUpdate}
-                  title="Recent Updated"
-                  onCancel={handleCloseContact}
-                  footer={[
-                    <Button key="cancel" onClick={handleCloseUpdate}>
-                      Close
-                    </Button>,
-                    <Button
-                      key="save"
-                      type="primary"
-                      onClick={handleCloseUpdate}
-                    >
-                      Save
-                    </Button>,
-                  ]}
-                >
-                  <p>Nothing</p>
-                </Modal>
-              </Row>
-
-              <Row>
-                {courses.map((course) => (
-                  <Col sm={12} md={6} lg={4} key={course.cid}>
-                    <Card
-                      title={course.name}
-                      bordered={false}
-                      style={{ marginBottom: 16 }}
-                    >
-                      <p>
-                        <DesktopOutlined /> Class: {course.class}
-                      </p>
-                      <p>
-                        <IdcardOutlined /> Teacher:{" "}
-                        {getTeacherName(course.teacher)}
-                      </p>
-                      <p>
-                        <TeamOutlined /> Number of Students:{" "}
-                        {course.numberStudent}
-                      </p>
-                      <Button type="link">
-                        <Link to={`/courses/${course.id}`}>
-                          Go to Course <RightCircleTwoTone />
-                        </Link>
-                      </Button>
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </TabPane>
-            <TabPane tab="PROJECT" key="2">
-              <Row>
-                <h4>Semester</h4>
-                <Select
-                  defaultValue="Trial"
-                  style={{
-                    width: 155,
-                  }}
-                  onChange={handleChange}
-                  options={[
-                    {
-                      value: "Trial",
-                      label: "Trial",
-                    },
-                    {
-                      value: "SUMMER2024",
-                      label: "SUMMER2024",
-                    },
-                    {
-                      value: "SPRING2024",
-                      label: "SPRING2024",
-                    },
-                    {
-                      value: "FAL2023",
-                      label: "FAL2023",
-                    },
-                  ]}
-                />
-              </Row>
-              <Row className="text-center">
-                <img
-                  src="/images/box-no-data.png"
-                  alt="box-no-data"
-                  style={{ width: "20%", marginLeft: "39%" }}
-                ></img>
-                <div>
-                  <h3
-                    className="fs-18 accent-color mg-b-10"
-                    style={{ color: "#0078d4" }}
-                  >
-                    No data available.
-                  </h3>
-                  <h4 className="mg-0 fs-12 mt-2">
-                    Please contact your school administration for more
-                    information.
-                  </h4>
-                </div>
-              </Row>
-            </TabPane>
-          </Tabs>
+          <Row className="text-center pt-4">
+            <img
+              src="/images/box-no-data.png"
+              alt="box-no-data"
+              style={{ width: "20%", marginLeft: "39%" }}
+            ></img>
+            <div>
+              <h3
+                className="fs-18 accent-color mg-b-10"
+                style={{ color: "#0078d4" }}
+              >
+                No data available.
+              </h3>
+              <h4 className="mg-0 fs-12 mt-2">
+                Please contact your school administration for more information.
+              </h4>
+            </div>
+          </Row>
         </Col>
       </Row>
     </Container>
   );
 };
 
-export default TeacherDasboard;
+export default Assignment;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import useAuth from '../hooks/useAuth';
-import AdminDashboard from './AdminDashboard';
-import TeacherDashboard from './TeacherDashboard';
-import StudentDashboard from './StudentDashboard';
+import AdminDashboard from './Admin/AdminDashboard';
+import StudentDashboard from './Student/StudentDashboard';
+import TeacherDashboard from './Teacher/TeacherDashboard';
 
 const Management = () => {
     const { role } = useAuth();

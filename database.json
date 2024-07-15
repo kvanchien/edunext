@@ -34,6 +34,14 @@
       "password": "123",
       "role": "student",
       "campus": "HOLA"
+    },
+    {
+      "username": "sv3",
+      "name": "test",
+      "password": "123",
+      "campus": "HCM",
+      "role": "student",
+      "id": 6
     }
   ],
   "students": [
@@ -43,7 +51,10 @@
       "name": "Nguyen Van A",
       "class": "SE1900",
       "campus": "HOLA",
-      "courses": [1, 2]
+      "courses": [
+        1,
+        2
+      ]
     },
     {
       "studentId": 2,
@@ -51,7 +62,9 @@
       "name": "Nguyen Van B",
       "class": "SE9999",
       "campus": "HOLA",
-      "courses": [2]
+      "courses": [
+        2
+      ]
     }
   ],
   "teachers": [
@@ -59,13 +72,19 @@
       "teacherId": 1,
       "userId": 2,
       "name": "tuanvm",
-      "courses": [1]
+      "campus": "HOLA",
+      "courses": [
+        1
+      ]
     },
     {
       "teacherId": 2,
       "userId": 3,
       "name": "hoann",
-      "courses": [2]
+      "campus": "HOLA",
+      "courses": [
+        2
+      ]
     }
   ],
   "courses": [

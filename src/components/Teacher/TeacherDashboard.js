@@ -16,7 +16,7 @@ import {
   HomeOutlined,
 } from "@ant-design/icons";
 import { Button, Menu, Modal, Form, Tabs, Select, Card } from "antd";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
@@ -64,7 +64,7 @@ const items = [
   },
 ];
 
-const StudentDashboard = () => {
+const TeacherDasboard = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [showContact, setShowContact] = useState(false);
@@ -74,7 +74,7 @@ const StudentDashboard = () => {
   const [courses, setCourses] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [students, setStudents] = useState([]);
-  const [loggedInStudent, setLoggedInStudent] = useState(null); // State for logged-in student
+  const [loggedInStudent, setLoggedInStudent] = useState(null); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -172,11 +172,14 @@ const StudentDashboard = () => {
         <Col md={3}>
           <div style={{ display: "flex" }}>
             <div style={{ width: 256 }}>
-              <img
-                src="images/FPT_Education_logo.svg.png"
-                alt="logo"
-                width={"80px"}
-              />
+            <img
+                  src="images/FPT_Education_logo.svg.png"
+                  alt="logo"
+                  style={{
+                    width: collapsed ? "80px" : "120px",
+                    transition: "width 0.3s",
+                  }}
+                />
               <br />
               <Button type="" onClick={toggleCollapsed} width={"50px"}>
                 {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -428,6 +431,13 @@ const StudentDashboard = () => {
                 </Modal>
               </Row>
 
+              <br/>
+              <br/>
+              <Row>
+                <h2>Welcome teacher to FPT EduNext!</h2>
+              </Row>
+              <br/>
+              <br/>
               <Row>
                 {courses.map((course) => (
                   <Col sm={12} md={6} lg={4} key={course.cid}>
@@ -513,4 +523,4 @@ const StudentDashboard = () => {
   );
 };
 
-export default StudentDashboard;
+export default TeacherDasboard;

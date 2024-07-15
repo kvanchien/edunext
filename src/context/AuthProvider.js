@@ -13,6 +13,8 @@ const AuthProvider = ({ children }) => {
     return savedCampus ? JSON.parse(savedCampus) : null;
   });
 
+  
+
   useEffect(() => {
     if (role) {
       localStorage.setItem('role', JSON.stringify(role));
