@@ -42,6 +42,30 @@
       "campus": "HCM",
       "role": "student",
       "id": 6
+    },
+    {
+      "username": "sv4",
+      "name": "test",
+      "password": "1",
+      "campus": "HOLA",
+      "role": "student",
+      "id": 7
+    },
+    {
+      "username": "sv5",
+      "name": "sv5",
+      "password": "1",
+      "campus": "HOLA",
+      "role": "student",
+      "id": 8
+    },
+    {
+      "username": "sv6",
+      "name": "sv6",
+      "password": "1",
+      "campus": "HOLA",
+      "role": "student",
+      "id": 9
     }
   ],
   "students": [

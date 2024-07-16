@@ -119,6 +119,8 @@ const TeacherDasboard = () => {
   const handleMenuClick = (e) => {
     if (e.key === "2") {
       setShowInfo(true);
+    } else if (e.key === "1") {
+      navigate("/management")
     } else if (e.key === "8") {
       handleLogout();
     } else if (e.key === "5") {

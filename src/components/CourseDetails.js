@@ -172,7 +172,7 @@ const CourseDetails = () => {
   };
 
   const handleQuestionClick = (slotId, questionId) => {
-    navigate(`/slot/${slotId}/question/${questionId}`);
+    navigate(`slot/${slotId}/question/${questionId}`);
   };
 
   if (!course) {
@@ -372,20 +372,19 @@ const CourseDetails = () => {
               },
             ]}
           ></Breadcrumb>
-          <br/>
+          <br />
           <Row>
-            <h6 style={{color:"#0078d4"}}>Filter by activities</h6>
-          <Select
-            defaultValue="All"
-            style={{ width: 200, marginBottom: 10 }}
-            onChange={(value) => setFilter(value)}
-          >
-            <Option value="All">All Activities</Option>
-            <Option value="On going">On going</Option>
-            <Option value="Done">Done</Option>
-          </Select>
+            <h6 style={{ color: "#0078d4" }}>Filter by activities</h6>
+            <Select
+              defaultValue="All"
+              style={{ width: 200, marginBottom: 10 }}
+              onChange={(value) => setFilter(value)}
+            >
+              <Option value="All">All Activities</Option>
+              <Option value="On going">On going</Option>
+              <Option value="Done">Done</Option>
+            </Select>
           </Row>
-          
 
           <Card
             title={course.name}
@@ -408,7 +407,7 @@ const CourseDetails = () => {
                   <List.Item.Meta title={slot.title} description={slot.desc} />
                   <Collapse accordion>
                     {slot.question && slot.question.length > 0 ? (
-                        filterQuestions(slot.question).map((question, index) => (
+                      filterQuestions(slot.question).map((question, index) => (
                         <Collapse.Panel header={`CQ${index + 1}`} key={index}>
                           <p
                             style={{
@@ -427,6 +426,11 @@ const CourseDetails = () => {
                                 color:
                                   question.state === "Done" ? "black" : "white",
                               }}
+                              className={
+                                question.state === "Done"
+                                  ? "bg-warning"
+                                  : "bg-primary"
+                              }
                             >
                               {question.state}
                             </Badge>
