@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Card, Menu, Form, Button, Modal, Breadcrumb, Tabs, List } from "antd";
+import {
+  Card,
+  Menu,
+  Form,
+  Button,
+  Modal,
+  Breadcrumb,
+  Tabs,
+  List,
+  Input,
+  Rate,
+  Collapse,
+} from "antd";
 import {
   FilePdfFilled,
   MenuUnfoldOutlined,
@@ -73,6 +85,8 @@ const QuestionDetailPage = () => {
   const [showFQA, setShowFQA] = useState(false);
   const { role, campus, logout } = useAuth();
   const navigate = useNavigate();
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
     const fetchCourseData = async () => {
@@ -97,6 +111,7 @@ const QuestionDetailPage = () => {
           );
           console.log("Selected question:", selectedQuestion);
           setQuestion(selectedQuestion);
+          setComments(selectedQuestion.comments || []);
         }
       } catch (error) {
         console.error("Error fetching course data:", error);
@@ -157,9 +172,39 @@ const QuestionDetailPage = () => {
     console.log(`selected ${value}`);
   };
 
+  const handleCommentChange = (e) => {
+    setNewComment(e.target.value);
+  };
+
+  const handleCommentSubmit = () => {
+    if (newComment.trim() !== "") {
+      setComments([...comments, { text: newComment }]);
+      setNewComment("");
+    }
+  };
+
+  const { Panel } = Collapse;
+
   function callback(key) {
     console.log(key);
   }
+
+  const handleRateChange = (commentId, value) => {
+    setComments((prevComments) =>
+      prevComments.map((comment) =>
+        comment.id === commentId ? { ...comment, rating: value } : comment
+      )
+    );
+    // Here, you should also update the rating in the backend.
+    // Example:
+    // fetch(`http://localhost:9999/comments/${commentId}`, {
+    //   method: 'PUT',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ rating: value }),
+    // }).then(response => response.json()).then(data => console.log(data));
+  };
 
   if (!course || !slot || !question) {
     return <div>Loading...</div>;
@@ -390,9 +435,72 @@ const QuestionDetailPage = () => {
             </div>
             <br />
             <Tabs defaultActiveKey="1" onChange={callback}>
-              <TabPane tab="GROUP" key="1"></TabPane>
+              <TabPane tab="GROUP" key="1">
+                <Collapse>
+                  <Panel header="Your group" key="1">
+                    <List
+                      dataSource={course.students}
+                      renderItem={(student) => (
+                        <List.Item>
+                          <List.Item.Meta
+                            avatar={<UserOutlined />}
+                            title={student.name}
+                            description={`Class: ${student.class}, Campus: ${student.campus}`}
+                          />
+                        </List.Item>
+                      )}
+                    />
+                  </Panel>
+                </Collapse>
+              </TabPane>
 
-              <TabPane tab="DISCUSS" key="2"></TabPane>
+              <TabPane tab="DISCUSS" key="2">
+                <Form
+                  layout="inline"
+                  onFinish={(values) => {
+                    const newComment = {
+                      id: comments.length + 1,
+                      text: values.comment,
+                      rating: 0,
+                    };
+                    setComments([...comments, newComment]);
+                  }}
+                >
+                  <Form.Item
+                    name="comment"
+                    rules={[
+                      { required: true, message: "Please input your answer!" },
+                    ]}
+                  >
+                    <Input
+                      placeholder="Add a answer for question"
+                      style={{ width: "400px" }}
+                    />
+                  </Form.Item>
+                  <Form.Item>
+                    <Button type="primary" htmlType="submit">
+                      Post
+                    </Button>
+                  </Form.Item>
+                </Form>
+                <List
+                  itemLayout="horizontal"
+                  dataSource={comments}
+                  renderItem={(item) => (
+                    <List.Item>
+                      <List.Item.Meta
+                        avatar={<CommentOutlined />}
+                        title="User"
+                        description={item.text}
+                      />
+                      <Rate
+                        value={item.rating}
+                        onChange={(value) => handleRateChange(item.id, value)}
+                      />
+                    </List.Item>
+                  )}
+                />
+              </TabPane>
 
               <TabPane tab="GRADE" key="3">
                 <Card title="Functions" style={{ marginBottom: 16 }}>
@@ -582,7 +690,9 @@ const QuestionDetailPage = () => {
                     >
                       <Row>
                         <Col md={9}>
-                          <p style={{color:"black"}}><CommentOutlined /> {" "}{q.context}</p>
+                          <p style={{ color: "black" }}>
+                            <CommentOutlined /> {q.context}
+                          </p>
                         </Col>
 
                         <Col md={2}>

@@ -75,10 +75,7 @@
       "name": "Nguyen Van A",
       "class": "SE1900",
       "campus": "HOLA",
-      "courses": [
-        1,
-        2
-      ]
+      "courses": [1, 2]
     },
     {
       "studentId": 2,
@@ -86,9 +83,39 @@
       "name": "Nguyen Van B",
       "class": "SE9999",
       "campus": "HOLA",
-      "courses": [
-        2
-      ]
+      "courses": [2]
+    },
+    {
+      "studentId": 2,
+      "userId": 6,
+      "name": "Nguyen Van B",
+      "class": "SE9999",
+      "campus": "HOLA",
+      "courses": [2]
+    },
+    {
+      "studentId": 3,
+      "userId": 7,
+      "name": "Nguyen Van C",
+      "class": "SE9999",
+      "campus": "HOLA",
+      "courses": [1, 2]
+    },
+    {
+      "studentId": 4,
+      "userId": 8,
+      "name": "Nguyen Van D",
+      "class": "SE9999",
+      "campus": "HOLA",
+      "courses": [1, 2]
+    },
+    {
+      "studentId": 4,
+      "userId": 9,
+      "name": "Nguyen Thi D",
+      "class": "SE9999",
+      "campus": "HOLA",
+      "courses": [1, 2]
     }
   ],
   "teachers": [
@@ -97,18 +124,14 @@
       "userId": 2,
       "name": "tuanvm",
       "campus": "HOLA",
-      "courses": [
-        1
-      ]
+      "courses": [1]
     },
     {
       "teacherId": 2,
       "userId": 3,
       "name": "hoann",
       "campus": "HOLA",
-      "courses": [
-        2
-      ]
+      "courses": [2]
     }
   ],
   "courses": [
