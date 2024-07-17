@@ -150,17 +150,59 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "Done"
+              "state": "Done",
+              "comments": [
+                {
+                  "id":1,
+                  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex",
+                  "author": "Nguyen Van B",
+                  "rating": 5
+                },
+                {
+                  "id":2,
+                  "content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex",
+                  "author":"Nguyen Van C",
+                  "rating": 4
+                }
+              ]
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "Done"
+              "state": "Done",
+              "comments": [
+                {
+                  "id":1,
+                  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex",
+                  "author": "Nguyen Van D",
+                  "rating": 4
+                },
+                {
+                  "id":2,
+                  "content":"Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex",
+                  "author":"Nguyen Van C",
+                  "rating":4
+                }
+              ]
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "Done"
+              "state": "Done",
+              "comments": [
+                {
+                  "id":1,
+                  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex",
+                  "author": "Nguyen Van B",
+                  "rating": 5
+                },
+                {
+                  "id":2,
+                  "content":"Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex",
+                  "author":"Nguyen Van C",
+                  "rating":5
+                }
+              ]
             }
           ]
         },
@@ -172,17 +214,21 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
+              
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -194,17 +240,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -216,17 +265,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -238,17 +290,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -260,17 +315,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -282,17 +340,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -349,17 +410,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -371,17 +435,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -393,17 +460,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -415,17 +485,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -437,17 +510,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -459,17 +535,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -481,17 +560,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -503,17 +585,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },
@@ -525,17 +610,20 @@
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going"
+              "state": "On going",
+              "comments": []
             }
           ]
         },

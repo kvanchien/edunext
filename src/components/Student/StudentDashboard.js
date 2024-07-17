@@ -74,7 +74,6 @@ const StudentDashboard = () => {
   const [courses, setCourses] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [students, setStudents] = useState([]);
-  
   const [loggedInStudent, setLoggedInStudent] = useState(null); 
   const navigate = useNavigate();
 

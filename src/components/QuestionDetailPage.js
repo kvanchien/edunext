@@ -12,6 +12,8 @@ import {
   Input,
   Rate,
   Collapse,
+  Table,
+  Avatar
 } from "antd";
 import {
   FilePdfFilled,
@@ -30,6 +32,7 @@ import {
 import { Container, Row, Col, Badge } from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 const items = [
   {
@@ -83,10 +86,13 @@ const QuestionDetailPage = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [showFQA, setShowFQA] = useState(false);
+  const [gradeGM, setGradeGM] = useState(false);
   const { role, campus, logout } = useAuth();
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [students, setStudents] = useState([]);
+  const [loggedInStudent, setLoggedInStudent] = useState(null);
 
   useEffect(() => {
     const fetchCourseData = async () => {
@@ -117,6 +123,20 @@ const QuestionDetailPage = () => {
         console.error("Error fetching course data:", error);
       }
     };
+
+    const fetchStudents = async () => {
+      const res = await axios.get("http://localhost:9999/students");
+      setStudents(res.data);
+
+      const userId = localStorage.getItem("userId");
+      if (userId) {
+        const loggedInStudentData = res.data.find(
+          (student) => student.userId === userId
+        );
+        setLoggedInStudent(loggedInStudentData);
+      }
+    };
+    fetchStudents();
     fetchCourseData();
   }, [courseId, slotId, questionId]);
 
@@ -166,6 +186,42 @@ const QuestionDetailPage = () => {
     setShowFQA(false);
   };
 
+  const handleCloseGradeGM = () => {
+    setGradeGM(false);
+  };
+
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Hard-working',
+      dataIndex: 'hardWorking',
+      key: 'hardWorking',
+      render: (_, record) => (
+        <Rate onChange={(value) => handleRateChange(record.id, 'hardWorking', value)} />
+      ),
+    },
+    {
+      title: 'Skills',
+      dataIndex: 'skills',
+      key: 'skills',
+      render: (_, record) => (
+        <Rate onChange={(value) => handleRateChange(record.id, 'skills', value)} />
+      ),
+    },
+    {
+      title: 'Teamwork',
+      dataIndex: 'teamwork',
+      key: 'teamwork',
+      render: (_, record) => (
+        <Rate onChange={(value) => handleRateChange(record.id, 'teamwork', value)} />
+      ),
+    },
+  ];
+
   const TabPane = Tabs.TabPane;
 
   const handleChange = (value) => {
@@ -195,15 +251,6 @@ const QuestionDetailPage = () => {
         comment.id === commentId ? { ...comment, rating: value } : comment
       )
     );
-    // Here, you should also update the rating in the backend.
-    // Example:
-    // fetch(`http://localhost:9999/comments/${commentId}`, {
-    //   method: 'PUT',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ rating: value }),
-    // }).then(response => response.json()).then(data => console.log(data));
   };
 
   if (!course || !slot || !question) {
@@ -439,13 +486,12 @@ const QuestionDetailPage = () => {
                 <Collapse>
                   <Panel header="Your group" key="1">
                     <List
-                      dataSource={course.students}
+                      dataSource={students}
                       renderItem={(student) => (
                         <List.Item>
                           <List.Item.Meta
                             avatar={<UserOutlined />}
                             title={student.name}
-                            description={`Class: ${student.class}, Campus: ${student.campus}`}
                           />
                         </List.Item>
                       )}
@@ -472,13 +518,17 @@ const QuestionDetailPage = () => {
                       { required: true, message: "Please input your answer!" },
                     ]}
                   >
-                    <Input
+                    <Input.TextArea
                       placeholder="Add a answer for question"
-                      style={{ width: "400px" }}
+                      style={{ width: "820px" }}
                     />
                   </Form.Item>
                   <Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      onClick={handleCommentSubmit}
+                    >
                       Post
                     </Button>
                   </Form.Item>
@@ -486,16 +536,18 @@ const QuestionDetailPage = () => {
                 <List
                   itemLayout="horizontal"
                   dataSource={comments}
-                  renderItem={(item) => (
+                  renderItem={(comment) => (
                     <List.Item>
                       <List.Item.Meta
                         avatar={<CommentOutlined />}
-                        title="User"
-                        description={item.text}
+                        title={comment.author}
+                        description={comment.content}
                       />
                       <Rate
-                        value={item.rating}
-                        onChange={(value) => handleRateChange(item.id, value)}
+                        value={comment.rating}
+                        onChange={(value) =>
+                          handleRateChange(comment.id, value)
+                        }
                       />
                     </List.Item>
                   )}
@@ -591,9 +643,39 @@ const QuestionDetailPage = () => {
             </span>
             <br />
             <br />
-            <Button type="primary" style={{ width: "100%" }}>
+            <Button
+              type="primary"
+              onClick={() => setGradeGM(true)}
+              style={{ width: "100%" }}
+            >
               GRADE ON GROUPMATES
             </Button>
+            <Modal
+            visible={gradeGM}
+            width={800}
+            title="GRADE ON GROUPMATES"
+            onCancel={handleCloseGradeGM}
+            footer={[
+              <Button key="cancel" onClick={handleCloseGradeGM}>
+                Cancel
+              </Button>,
+              <Button key="save" type="primary" onClick={handleCloseGradeGM}>
+                Save
+              </Button>,
+            ]}
+          >
+            <Table
+              columns={columns}
+              dataSource={students.map(student => ({ 
+                key: student.id,
+                name: student.name,
+                hardWorking: student.hardWorking,
+                skills: student.skills,
+                teamwork: student.teamwork
+              }))}
+              pagination={false}
+            />
+          </Modal>
           </Row>
           <br />
           <br />
