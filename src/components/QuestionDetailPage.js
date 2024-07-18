@@ -13,7 +13,7 @@ import {
   Rate,
   Collapse,
   Table,
-  Avatar
+  Avatar,
 } from "antd";
 import {
   FilePdfFilled,
@@ -87,6 +87,7 @@ const QuestionDetailPage = () => {
   const [showContact, setShowContact] = useState(false);
   const [showFQA, setShowFQA] = useState(false);
   const [gradeGM, setGradeGM] = useState(false);
+  const [showUpdate, setShowUpdate] = useState(false);
   const { role, campus, logout } = useAuth();
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
@@ -186,44 +187,55 @@ const QuestionDetailPage = () => {
     setShowFQA(false);
   };
 
+  const handleCloseUpdate = () => {
+    setShowUpdate(false);
+  };
+
   const handleCloseGradeGM = () => {
     setGradeGM(false);
   };
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: 'Hard-working',
-      dataIndex: 'hardWorking',
-      key: 'hardWorking',
+      title: "Hard-working",
+      dataIndex: "hardWorking",
+      key: "hardWorking",
       render: (_, record) => (
-        <Rate onChange={(value) => handleRateChange(record.id, 'hardWorking', value)} />
+        <Rate
+          onChange={(value) =>
+            handleRateChange(record.id, "hardWorking", value)
+          }
+        />
       ),
     },
     {
-      title: 'Skills',
-      dataIndex: 'skills',
-      key: 'skills',
+      title: "Good knowledge/Skills",
+      dataIndex: "skills",
+      key: "skills",
       render: (_, record) => (
-        <Rate onChange={(value) => handleRateChange(record.id, 'skills', value)} />
+        <Rate
+          onChange={(value) => handleRateChange(record.id, "skills", value)}
+        />
       ),
     },
     {
-      title: 'Teamwork',
-      dataIndex: 'teamwork',
-      key: 'teamwork',
+      title: "Teamwork",
+      dataIndex: "teamwork",
+      key: "teamwork",
       render: (_, record) => (
-        <Rate onChange={(value) => handleRateChange(record.id, 'teamwork', value)} />
+        <Rate
+          onChange={(value) => handleRateChange(record.id, "teamwork", value)}
+        />
       ),
     },
   ];
 
   const TabPane = Tabs.TabPane;
-
 
   const { Panel } = Collapse;
 
@@ -487,8 +499,8 @@ const QuestionDetailPage = () => {
               </TabPane>
 
               <TabPane tab="DISCUSS" key="2">
-                <h4>Comments</h4> <br/>
-                 <Form
+                <h4>Comments</h4> <br />
+                <Form
                   layout="inline"
                   onFinish={(values) => {
                     const newComment = {
@@ -517,7 +529,7 @@ const QuestionDetailPage = () => {
                     </Button>
                   </Form.Item>
                 </Form>
-                <br/>
+                <br />
                 <List
                   itemLayout="horizontal"
                   dataSource={comments}
@@ -535,8 +547,6 @@ const QuestionDetailPage = () => {
                     </List.Item>
                   )}
                 />
-
-                
               </TabPane>
 
               <TabPane tab="GRADE" key="3">
@@ -615,9 +625,39 @@ const QuestionDetailPage = () => {
             </span>
             <br />
             <br />
-            <Button type="primary" style={{ width: "100%" }}>
+            <Button
+              type="primary"
+              onClick={() => setShowUpdate(true)}
+              style={{ width: "100%" }}
+            >
               UPDATE
             </Button>
+            <Modal
+              visible={showUpdate}
+              width={500}
+              title="Update Meeting Video Link"
+              onCancel={handleCloseUpdate}
+              footer={[
+                <Button key="cancel" onClick={handleCloseUpdate}>
+                  Close
+                </Button>,
+                <Button key="save" type="primary" onClick={handleCloseUpdate}>
+                  Save
+                </Button>,
+              ]}
+            >
+              <span>Add meeting video code</span> <br />
+              
+              <Form layout="inline">
+                <Form.Item
+                  name="code"
+                  rules={[{ required: true, message: "Please input code!" }]}
+                >
+                  <span>https://meet.google.com/</span>
+                  <Input placeholder="Code" style={{ width: "200px" }} />
+                </Form.Item>
+              </Form>
+            </Modal>
           </Row>
           <br />
           <br />
@@ -636,31 +676,31 @@ const QuestionDetailPage = () => {
               GRADE ON GROUPMATES
             </Button>
             <Modal
-            visible={gradeGM}
-            width={800}
-            title="GRADE ON GROUPMATES"
-            onCancel={handleCloseGradeGM}
-            footer={[
-              <Button key="cancel" onClick={handleCloseGradeGM}>
-                Cancel
-              </Button>,
-              <Button key="save" type="primary" onClick={handleCloseGradeGM}>
-                Save
-              </Button>,
-            ]}
-          >
-            <Table
-              columns={columns}
-              dataSource={students.map(student => ({ 
-                key: student.id,
-                name: student.name,
-                hardWorking: student.hardWorking,
-                skills: student.skills,
-                teamwork: student.teamwork
-              }))}
-              pagination={false}
-            />
-          </Modal>
+              visible={gradeGM}
+              width={800}
+              title="GRADE ON GROUPMATES"
+              onCancel={handleCloseGradeGM}
+              footer={[
+                <Button key="cancel" onClick={handleCloseGradeGM}>
+                  Cancel
+                </Button>,
+                <Button key="save" type="primary" onClick={handleCloseGradeGM}>
+                  Save
+                </Button>,
+              ]}
+            >
+              <Table
+                columns={columns}
+                dataSource={students.map((student) => ({
+                  key: student.id,
+                  name: student.name,
+                  hardWorking: student.hardWorking,
+                  skills: student.skills,
+                  teamwork: student.teamwork,
+                }))}
+                pagination={false}
+              />
+            </Modal>
           </Row>
           <br />
           <br />

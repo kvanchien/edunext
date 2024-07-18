@@ -418,8 +418,8 @@ const StudentDashboard = () => {
                       label: "SPRING2024",
                     },
                     {
-                      value: "FAL2023",
-                      label: "FAL2023",
+                      value: "FALL2023",
+                      label: "FALL2023",
                     },
                   ]}
                 />
@@ -502,8 +502,8 @@ const StudentDashboard = () => {
                       label: "SPRING2024",
                     },
                     {
-                      value: "FAL2023",
-                      label: "FAL2023",
+                      value: "FALL2023",
+                      label: "FALL2023",
                     },
                   ]}
                 />
