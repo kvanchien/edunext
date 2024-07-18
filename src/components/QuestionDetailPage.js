@@ -224,20 +224,6 @@ const QuestionDetailPage = () => {
 
   const TabPane = Tabs.TabPane;
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-
-  const handleCommentChange = (e) => {
-    setNewComment(e.target.value);
-  };
-
-  const handleCommentSubmit = () => {
-    if (newComment.trim() !== "") {
-      setComments([...comments, { text: newComment }]);
-      setNewComment("");
-    }
-  };
 
   const { Panel } = Collapse;
 
@@ -501,12 +487,14 @@ const QuestionDetailPage = () => {
               </TabPane>
 
               <TabPane tab="DISCUSS" key="2">
-                <Form
+                <h4>Comments</h4> <br/>
+                 <Form
                   layout="inline"
                   onFinish={(values) => {
                     const newComment = {
                       id: comments.length + 1,
-                      text: values.comment,
+                      author: "You",
+                      content: values.comment,
                       rating: 0,
                     };
                     setComments([...comments, newComment]);
@@ -524,34 +512,31 @@ const QuestionDetailPage = () => {
                     />
                   </Form.Item>
                   <Form.Item>
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      onClick={handleCommentSubmit}
-                    >
+                    <Button type="primary" htmlType="submit">
                       Post
                     </Button>
                   </Form.Item>
                 </Form>
+                <br/>
                 <List
                   itemLayout="horizontal"
                   dataSource={comments}
-                  renderItem={(comment) => (
+                  renderItem={(item) => (
                     <List.Item>
                       <List.Item.Meta
                         avatar={<CommentOutlined />}
-                        title={comment.author}
-                        description={comment.content}
+                        title={item.author}
+                        description={item.content}
                       />
                       <Rate
-                        value={comment.rating}
-                        onChange={(value) =>
-                          handleRateChange(comment.id, value)
-                        }
+                        value={item.rating}
+                        onChange={(value) => handleRateChange(item.id, value)}
                       />
                     </List.Item>
                   )}
                 />
+
+                
               </TabPane>
 
               <TabPane tab="GRADE" key="3">
