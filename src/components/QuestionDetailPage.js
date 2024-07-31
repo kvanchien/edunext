@@ -13,7 +13,6 @@ import {
   Rate,
   Collapse,
   Table,
-  Avatar,
 } from "antd";
 import {
   FilePdfFilled,

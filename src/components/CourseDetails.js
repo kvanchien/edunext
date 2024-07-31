@@ -398,7 +398,7 @@ const CourseDetails = () => {
                 <List.Item>
                   <Button type="primary">Slot {slot.id}</Button>{" "}
                   <Link
-                    to={`/slot/${slot.id}`}
+                    to={`slot/${slot.id}`}
                     style={{ marginLeft: "1100px" }}
                   >
                     <Button type="link">View slot</Button>
