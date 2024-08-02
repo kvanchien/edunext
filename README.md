@@ -11,6 +11,17 @@ My project using front-end is react and back-end i run in json-server
 3. Run `npx json-server --watch database.json --port 9999` to run back-end
 4. Open another terminal and run `npm start`
 
+### Link demo: https://edunext-alpha.vercel.app/
+
+### Note:
+
+This website is manage by school so that only admin can create new account. Go to file database.json to get data to launch demo or you can use the admin account bellow to login to see list of account.  
+
+Username: admin  
+Password: admin  
+Campus: Ha Noi
+
+
 ### Feedback and comments
 
 If you have any feedback to update this project please tell me. I am very happy when i received email from you
