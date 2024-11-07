@@ -222,54 +222,54 @@ const AdminDashboard = () => {
             <Button
               type="primary"
               onClick={() => showModal(null)}
-              style={{ marginBottom: "20px" }}
+              style={{ marginBottom: "20px", backgroundColor: "#1890ff", borderColor: "#1890ff" }}
             >
               Add User
             </Button>
 
-            <Table columns={columns} dataSource={users} rowKey="id" />
+            <Table
+              columns={columns}
+              dataSource={users}
+              rowKey="id"
+              style={{ backgroundColor: "#fff", borderRadius: "8px", boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)" }}
+            />
+
             <Modal
               title={isEdit ? "Edit User" : "Add User"}
               visible={isModalVisible}
               onOk={handleOk}
               onCancel={handleCancel}
+              okButtonProps={{ style: { backgroundColor: "#1890ff", borderColor: "#1890ff" } }}
+              cancelButtonProps={{ style: { backgroundColor: "#f0f2f5", color: "#000" } }}
             >
               <Form form={form} layout="vertical" name="userForm">
                 <Form.Item
                   name="username"
                   label="Username"
-                  rules={[
-                    { required: true, message: "Please input the username!" },
-                  ]}
+                  rules={[{ required: true, message: "Please input the username!" }]}
                 >
-                  <Input />
+                  <Input style={{ borderRadius: "4px" }} />
                 </Form.Item>
                 <Form.Item
                   name="name"
                   label="Name"
-                  rules={[
-                    { required: true, message: "Please input the name!" },
-                  ]}
+                  rules={[{ required: true, message: "Please input the name!" }]}
                 >
-                  <Input />
+                  <Input style={{ borderRadius: "4px" }} />
                 </Form.Item>
                 <Form.Item
                   name="password"
                   label="Password"
-                  rules={[
-                    { required: true, message: "Please input the password!" },
-                  ]}
+                  rules={[{ required: true, message: "Please input the password!" }]}
                 >
-                  <Input.Password />
+                  <Input.Password style={{ borderRadius: "4px" }} />
                 </Form.Item>
                 <Form.Item
                   name="campus"
                   label="Campus"
-                  rules={[
-                    { required: true, message: "Please input the campus!" },
-                  ]}
+                  rules={[{ required: true, message: "Please input the campus!" }]}
                 >
-                  <Select>
+                  <Select style={{ borderRadius: "4px" }}>
                     <Option value="DN">Đà Nẵng</Option>
                     <Option value="CT">Cần Thơ</Option>
                     <Option value="QN">Quy Nhơn</Option>
@@ -280,11 +280,9 @@ const AdminDashboard = () => {
                 <Form.Item
                   name="role"
                   label="Role"
-                  rules={[
-                    { required: true, message: "Please select the role!" },
-                  ]}
+                  rules={[{ required: true, message: "Please select the role!" }]}
                 >
-                  <Select>
+                  <Select style={{ borderRadius: "4px" }}>
                     <Option value="admin">Admin</Option>
                     <Option value="teacher">Teacher</Option>
                     <Option value="student">Student</Option>

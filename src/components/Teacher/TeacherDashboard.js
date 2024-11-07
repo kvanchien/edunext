@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
+  Button, Menu, Modal, Form, Input, Card, Tabs, Select
+} from "antd";
+import { PlusOutlined, EditOutlined, DeleteOutlined ,
   FilePdfFilled,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -13,13 +16,11 @@ import {
   IdcardOutlined,
   RightCircleTwoTone,
   TeamOutlined,
-  HomeOutlined,
-} from "@ant-design/icons";
-import { Button, Menu, Modal, Form, Tabs, Select, Card } from "antd";
+  HomeOutlined,} from "@ant-design/icons";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import axios from "axios";
 
 const items = [
   {
@@ -64,54 +65,99 @@ const items = [
   },
 ];
 
-const TeacherDasboard = () => {
+
+const TeacherDashboard = () => {
+  const { role, logout, userId  } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [showFQA, setShowFQA] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
-  const { user, logout } = useAuth();
-  const [courses, setCourses] = useState([]);
-  const [teachers, setTeachers] = useState([]);
-  const [students, setStudents] = useState([]);
-  const [loggedInStudent, setLoggedInStudent] = useState(null); 
   const navigate = useNavigate();
+  const [courses, setCourses] = useState([]);
+  const [showCourseModal, setShowCourseModal] = useState(false);
+  const [showEditCourseModal, setShowEditCourseModal] = useState(false);
+  const [currentCourse, setCurrentCourse] = useState(null);
+  const [form] = Form.useForm();
+  const [teacherId, setTeacherId] = useState(null);
+  
 
   useEffect(() => {
-    const fetchCourses = async () => {
-      const res = await axios.get("http://localhost:9999/courses");
-      setCourses(res.data);
-    };
-
-    const fetchTeachers = async () => {
-      const res = await axios.get("http://localhost:9999/teachers");
-      setTeachers(res.data);
-    };
-
-    const fetchStudents = async () => {
-      const res = await axios.get("http://localhost:9999/students");
-      setStudents(res.data);
-
-      if (user && user.id) {
-        console.log("User ID:", user.id);
-        const loggedInStudentData = res.data.find(
-          (student) => student.userId === user.id
-        );
-        console.log("Logged in student data:", loggedInStudentData); 
-        setLoggedInStudent(loggedInStudentData);
+    // Fetch the teacher ID associated with the logged-in user
+    const fetchTeacherId = async () => {
+      try {
+        const response = await axios.get("http://localhost:9999/teachers");
+        const teacher = response.data.find(teacher => teacher.userId === userId);
+        if (teacher) {
+          setTeacherId(teacher.teacherId); // Set the correct teacherId
+        }
+      } catch (error) {
+        console.error("Error fetching teacher ID:", error);
       }
     };
 
-    fetchCourses();
-    fetchTeachers();
-    fetchStudents();
-  }, [user]);
+    if (userId && role === 'teacher') {
+      fetchTeacherId();
+    }
+  }, [userId, role]);
 
-  const getTeacherName = (teacherId) => {
-    const teacher = teachers.find((teacher) => teacher.teacherId === teacherId);
-    return teacher ? teacher.name : "Unknown Teacher";
+  useEffect(() => {
+    // Fetch courses only when the teacherId is available
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get("http://localhost:9999/courses");
+        const teacherCourses = response.data.filter(course => course.teacher === teacherId);
+        setCourses(teacherCourses);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    if (teacherId) {
+      fetchCourses();
+    }
+  }, [teacherId]);
+
+
+  // Add new course
+  const addCourse = async (values) => {
+    const courseData = { ...values, teacher: teacherId, slots: [] }; // Include teacher ID
+    try {
+      const response = await axios.post("http://localhost:9999/courses", courseData);
+      setCourses([...courses, response.data]);
+      setShowCourseModal(false);
+      form.resetFields();
+    } catch (error) {
+      console.error("Error adding course:", error);
+    }
+  };
+  
+
+  // Update existing course
+  const updateCourse = async (values) => {
+    const res = await axios.put(`http://localhost:9999/courses/${currentCourse.id}`, values);
+    setCourses(courses.map((course) => course.id === currentCourse.id ? res.data : course));
+    setShowEditCourseModal(false);
+    setCurrentCourse(null);
+    form.resetFields();
   };
 
+  // Delete course
+  const deleteCourse = async (courseId) => {
+    await axios.delete(`http://localhost:9999/courses/${courseId}`);
+    setCourses(courses.filter((course) => course.id !== courseId));
+  };
+
+  // Show edit course modal and set current course
+  const handleEditCourse = (course) => {
+    setCurrentCourse(course);
+    setShowEditCourseModal(true);
+    form.setFieldsValue(course);
+  };
+
+
+
+  // Logout
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
@@ -119,10 +165,12 @@ const TeacherDasboard = () => {
   const handleMenuClick = (e) => {
     if (e.key === "2") {
       setShowInfo(true);
-    } else if (e.key === "1") {
-      navigate("/management")
+      setShowContact(false);
+      setShowFQA(false);
     } else if (e.key === "8") {
       handleLogout();
+    } else if (e.key === "3") {
+      navigate("/assignment");
     } else if (e.key === "5") {
       handleDownloadPDF();
     } else if (e.key === "6") {
@@ -158,20 +206,15 @@ const TeacherDasboard = () => {
     setShowUpdate(false);
   };
 
-  const TabPane = Tabs.TabPane;
-
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-
-  function callback(key) {
-    console.log(key);
-  }
 
   return (
     <Container fluid>
-      <Row>
-        <Col md={3}>
+    <div style={{ padding: "20px" }}>
+      {role !== 'teacher' ? (
+        <p>Unauthorized Access</p>
+      ) : (
+        <Row>
+          <Col md={3}>
           <div style={{ display: "flex" }}>
             <div style={{ width: 256 }}>
             <img
@@ -343,186 +386,99 @@ const TeacherDasboard = () => {
               </Container>
             </Modal>
 
-            <Modal
-              visible={showInfo}
-              width={800}
-              title="Student Information"
-              onCancel={() => setShowInfo(false)}
-              footer={[
-                <Button key="cancel" onClick={() => setShowInfo(false)}>
-                  Close
-                </Button>,
-              ]}
-            >
-              {loggedInStudent ? (
-                <div>
-                  <p>
-                    <strong>Name:</strong> {loggedInStudent.name}
-                  </p>
-                  <p>
-                    <strong>Class:</strong> {loggedInStudent.class}
-                  </p>
-                  <p>
-                    <strong>Campus:</strong> {loggedInStudent.campus}
-                  </p>
-                  <p>
-                    <strong>Course:</strong> {loggedInStudent.course}
-                  </p>
-                </div>
-              ) : (
-                <p>No student information found.</p>
-              )}
-            </Modal>
+
           </div>
         </Col>
 
         <Col md={9}>
-          <Tabs defaultActiveKey="1" onChange={callback}>
-            <TabPane tab="COURSE" key="1">
-              <Row>
-                <h4>Semester</h4>
-                <Select
-                  defaultValue="Trial"
-                  style={{
-                    width: 155,
-                  }}
-                  onChange={handleChange}
-                  options={[
-                    {
-                      value: "Trial",
-                      label: "Trial",
-                    },
-                    {
-                      value: "SUMMER2024",
-                      label: "SUMMER2024",
-                    },
-                    {
-                      value: "SPRING2024",
-                      label: "SPRING2024",
-                    },
-                    {
-                      value: "FALL2023",
-                      label: "FALL2023",
-                    },
-                  ]}
-                />
-              </Row>
-              <Row>
-                <a href="#" onClick={setShowUpdate}>
-                  Recently Updated (Để xem chi tiết về các thay đổi cập nhật gần
-                  đây, vui lòng nhấp vào đây)
-                </a>
-                <Modal
-                  visible={showUpdate}
-                  title="Recent Updated"
-                  onCancel={handleCloseContact}
-                  footer={[
-                    <Button key="cancel" onClick={handleCloseUpdate}>
-                      Close
-                    </Button>,
-                    <Button
-                      key="save"
-                      type="primary"
-                      onClick={handleCloseUpdate}
-                    >
-                      Save
-                    </Button>,
-                  ]}
-                >
-                  <p>Nothing</p>
-                </Modal>
-              </Row>
+        
+          <h2>Teacher Dashboard</h2>
+        
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                onClick={() => setShowCourseModal(true)}
+                style={{ marginBottom: "16px" }}
+              >
+                Add New Course
+              </Button>
 
-              <br/>
-              <br/>
-              <Row>
-                <h2>Welcome teacher to FPT EduNext!</h2>
-              </Row>
-              <br/>
-              <br/>
-              <Row>
-                {courses.map((course) => (
-                  <Col sm={12} md={6} lg={4} key={course.cid}>
-                    <Card
-                      title={course.name}
-                      bordered={false}
-                      style={{ marginBottom: 16 }}
-                    >
-                      <p>
-                        <DesktopOutlined /> Class: {course.class}
-                      </p>
-                      <p>
-                        <IdcardOutlined /> Teacher:{" "}
-                        {getTeacherName(course.teacher)}
-                      </p>
-                      <p>
-                        <TeamOutlined /> Number of Students:{" "}
-                        {course.numberStudent}
-                      </p>
-                      <Button type="link">
-                        <Link to={`/courses/${course.id}`}>
-                          Go to Course <RightCircleTwoTone />
+              {courses.map((course) => (
+                <Card
+                  key={course.id}
+                  title={course.name}
+                  extra={
+                    <div>
+                      <Button icon={<EditOutlined />} onClick={() => handleEditCourse(course)}>Edit</Button>
+                      <Button
+                        icon={<DeleteOutlined />}
+                        onClick={() => deleteCourse(course.id)}
+                        danger
+                        style={{ marginLeft: "8px" }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  }
+                >
+                  <p>Class: {course.class}</p>
+                  <p>Number of Students: {course.numberStudent}</p>
+                  <Button type="link">
+                        <Link to={`/manage-detail/courses/${course.id}`}>
+                          Go to detail <RightCircleTwoTone />
                         </Link>
                       </Button>
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </TabPane>
-            <TabPane tab="PROJECT" key="2">
-              <Row>
-                <h4>Semester</h4>
-                <Select
-                  defaultValue="Trial"
-                  style={{
-                    width: 155,
-                  }}
-                  onChange={handleChange}
-                  options={[
-                    {
-                      value: "Trial",
-                      label: "Trial",
-                    },
-                    {
-                      value: "SUMMER2024",
-                      label: "SUMMER2024",
-                    },
-                    {
-                      value: "SPRING2024",
-                      label: "SPRING2024",
-                    },
-                    {
-                      value: "FALL2023",
-                      label: "FALL2023",
-                    },
-                  ]}
-                />
-              </Row>
-              <Row className="text-center">
-                <img
-                  src="/images/box-no-data.png"
-                  alt="box-no-data"
-                  style={{ width: "20%", marginLeft: "39%" }}
-                ></img>
-                <div>
-                  <h3
-                    className="fs-18 accent-color mg-b-10"
-                    style={{ color: "#0078d4" }}
-                  >
-                    No data available.
-                  </h3>
-                  <h4 className="mg-0 fs-12 mt-2">
-                    Please contact your school administration for more
-                    information.
-                  </h4>
-                </div>
-              </Row>
-            </TabPane>
-          </Tabs>
-        </Col>
-      </Row>
+                </Card>
+              ))}
+
+              {/* Add Course Modal */}
+              <Modal
+                title="Add New Course"
+                visible={showCourseModal}
+                onCancel={() => setShowCourseModal(false)}
+                footer={null}
+              >
+                <Form form={form} onFinish={addCourse} layout="vertical">
+                  <Form.Item name="name" label="Course Name" rules={[{ required: true, message: 'Please enter the course name!' }]}>
+                    <Input />
+                  </Form.Item>
+                  <Form.Item name="class" label="Class" rules={[{ required: true, message: 'Please enter the class!' }]}>
+                    <Input />
+                  </Form.Item>
+                  <Form.Item name="numberStudent" label="Number of Students" rules={[{ required: true, message: 'Please enter the number of students!' }]}>
+                    <Input type="number" />
+                  </Form.Item>
+                  <Button type="primary" htmlType="submit">Add Course</Button>
+                </Form>
+              </Modal>
+
+              {/* Edit Course Modal */}
+              <Modal
+                title="Edit Course"
+                visible={showEditCourseModal}
+                onCancel={() => setShowEditCourseModal(false)}
+                footer={null}
+              >
+                <Form form={form} onFinish={updateCourse} layout="vertical">
+                  <Form.Item name="name" label="Course Name" rules={[{ required: true, message: 'Please enter the course name!' }]}>
+                    <Input />
+                  </Form.Item>
+                  <Form.Item name="class" label="Class" rules={[{ required: true, message: 'Please enter the class!' }]}>
+                    <Input />
+                  </Form.Item>
+                  <Form.Item name="numberStudent" label="Number of Students" rules={[{ required: true, message: 'Please enter the number of students!' }]}>
+                    <Input type="number" />
+                  </Form.Item>
+                  <Button type="primary" htmlType="submit">Update Course</Button>
+                </Form>
+              </Modal>
+          
+          </Col>
+        </Row>
+      )}
+    </div>
     </Container>
   );
 };
 
-export default TeacherDasboard;
+export default TeacherDashboard;

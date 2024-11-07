@@ -21,7 +21,7 @@ export default function Login() {
       const user = response.data[0];
       if (user) {
         if (user.campus === campus) {
-          login(user.role, campus);
+          login(user.id, user.role, campus);
           navigate("/management");
         } else {
           alert("Wrong campus! Please select the correct campus.");

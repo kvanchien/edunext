@@ -13,7 +13,7 @@ const Management = () => {
         case 'admin':
           return <AdminDashboard />;
         case 'teacher':
-          return < TeacherDashboard/>;
+          return <TeacherDashboard/>;
         case 'student':
           return <StudentDashboard />;
         default:

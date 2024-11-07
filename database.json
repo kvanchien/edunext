@@ -55,17 +55,9 @@
       "username": "sv5",
       "name": "sv5",
       "password": "1",
-      "campus": "HOLA",
+      "campus": "QN",
       "role": "student",
       "id": 8
-    },
-    {
-      "username": "sv6",
-      "name": "sv6",
-      "password": "1",
-      "campus": "HOLA",
-      "role": "student",
-      "id": 9
     }
   ],
   "students": [
@@ -75,7 +67,10 @@
       "name": "Nguyen Van A",
       "class": "SE1900",
       "campus": "HOLA",
-      "courses": [1, 2]
+      "courses": [
+        1,
+        2
+      ]
     },
     {
       "studentId": 2,
@@ -83,7 +78,9 @@
       "name": "Nguyen Van B",
       "class": "SE9999",
       "campus": "HOLA",
-      "courses": [2]
+      "courses": [
+        2
+      ]
     },
     {
       "studentId": 2,
@@ -91,7 +88,9 @@
       "name": "Nguyen Van B",
       "class": "SE9999",
       "campus": "HOLA",
-      "courses": [2]
+      "courses": [
+        2
+      ]
     },
     {
       "studentId": 3,
@@ -99,7 +98,10 @@
       "name": "Nguyen Van C",
       "class": "SE9999",
       "campus": "HOLA",
-      "courses": [1, 2]
+      "courses": [
+        1,
+        2
+      ]
     },
     {
       "studentId": 4,
@@ -107,7 +109,10 @@
       "name": "Nguyen Van D",
       "class": "SE9999",
       "campus": "HOLA",
-      "courses": [1, 2]
+      "courses": [
+        1,
+        2
+      ]
     },
     {
       "studentId": 4,
@@ -115,7 +120,10 @@
       "name": "Nguyen Thi D",
       "class": "SE9999",
       "campus": "HOLA",
-      "courses": [1, 2]
+      "courses": [
+        1,
+        2
+      ]
     }
   ],
   "teachers": [
@@ -124,14 +132,18 @@
       "userId": 2,
       "name": "tuanvm",
       "campus": "HOLA",
-      "courses": [1]
+      "courses": [
+        1
+      ]
     },
     {
       "teacherId": 2,
       "userId": 3,
       "name": "hoann",
       "campus": "HOLA",
-      "courses": [2]
+      "courses": [
+        2
+      ]
     }
   ],
   "courses": [
@@ -140,94 +152,54 @@
       "name": "Lab211_ OOP with Java Lab_Thực hành OOP với Java",
       "class": "SE1900",
       "teacher": 1,
-      "numberStudent": 20,
+      "numberStudent": "22",
       "slots": [
         {
           "id": 1,
-          "title": "Introduction",
-          "desc": "Introduction to the course and class rules",
+          "title": "Introduction to FER",
+          "desc": "Introduction to the subject and its achievements",
           "question": [
             {
               "id": 1,
               "context": "How to get the course",
-              "state": "Done",
-              "comments": [
-                {
-                  "id":1,
-                  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex",
-                  "author": "Nguyen Van B",
-                  "rating": 5
-                },
-                {
-                  "id":2,
-                  "content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex",
-                  "author":"Nguyen Van C",
-                  "rating": 4
-                }
-              ]
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "Done",
-              "comments": [
-                {
-                  "id":1,
-                  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex",
-                  "author": "Nguyen Van D",
-                  "rating": 4
-                },
-                {
-                  "id":2,
-                  "content":"Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex",
-                  "author":"Nguyen Van C",
-                  "rating":4
-                }
-              ]
+              "state": "On going",
+              "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "Done",
-              "comments": [
-                {
-                  "id":1,
-                  "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex",
-                  "author": "Nguyen Van B",
-                  "rating": 5
-                },
-                {
-                  "id":2,
-                  "content":"Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex",
-                  "author":"Nguyen Van C",
-                  "rating":5
-                }
-              ]
+              "state": "On going",
+              "comments": []
             }
           ]
         },
         {
           "id": 2,
-          "title": "Getting Started",
-          "desc": "Downloading and installing necessary programming tools",
+          "title": "Title changed",
+          "desc": "Description of slot 2",
           "question": [
             {
               "id": 1,
-              "context": "How to get the course",
-              "state": "On going",
+              "context": "How to get the course2",
+              "state": "NotStart",
               "comments": []
             },
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going",
+              "state": "NotStart",
               "comments": []
-              
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going",
+              "state": "NotStart",
               "comments": []
             }
           ]
@@ -246,13 +218,13 @@
             {
               "id": 2,
               "context": "What is class rules",
-              "state": "On going",
+              "state": "NotStart",
               "comments": []
             },
             {
               "id": 3,
               "context": "How to pass",
-              "state": "On going",
+              "state": "NotStart",
               "comments": []
             }
           ]
@@ -361,13 +333,45 @@
           "id": 8,
           "title": "Slot 8",
           "desc": "Description of slot 8",
-          "question": []
+          "question": [
+            {
+              "id": 1,
+              "context": "How to get the course",
+              "state": "On going",
+              "comments": []
+            },
+            {
+              "id": 2,
+              "context": "What is class rules",
+              "state": "On going",
+              "comments": []
+            },
+            {
+              "id": 3,
+              "context": "How to pass",
+              "state": "On going",
+              "comments": []
+            }
+          ]
         },
         {
           "id": 9,
           "title": "Slot 9",
           "desc": "Description of slot 9",
-          "question": []
+          "question": [
+            {
+              "id": 1,
+              "context": "How to get the course",
+              "state": "On going",
+              "comments": []
+            },
+            {
+              "id": 2,
+              "context": "What is class rules",
+              "state": "On going",
+              "comments": []
+            }
+          ]
         },
         {
           "id": 10,
@@ -377,21 +381,22 @@
         },
         {
           "id": 11,
-          "title": "Slot 11",
-          "desc": "Description of slot 11",
-          "question": []
-        },
-        {
-          "id": 12,
-          "title": "Slot 12",
-          "desc": "Description of slot 12",
-          "question": []
-        },
-        {
-          "id": 13,
-          "title": "Slot 13",
-          "desc": "Description of slot 13",
-          "question": []
+          "title": "Test1",
+          "desc": "",
+          "question": [
+            {
+              "id": 4,
+              "context": "New Question",
+              "state": "Ongoing",
+              "comments": []
+            },
+            {
+              "id": 5,
+              "context": "New Question",
+              "state": "Pending",
+              "comments": []
+            }
+          ]
         }
       ]
     },
@@ -634,6 +639,12 @@
           "question": []
         }
       ]
+    },
+    {
+      "name": "test",
+      "class": "SE2000",
+      "numberStudent": "12",
+      "id": 3
     }
   ]
 }
